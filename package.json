@@ -1,0 +1,23 @@
+{
+  "name": "node-server-sample",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itslikegood/node-server-sample.git"
+  },
+  "author": "itslikegood",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/itslikegood/node-server-sample/issues"
+  },
+  "homepage": "https://github.com/itslikegood/node-server-sample#readme",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "express": "^4.13.4"
+  }
+}
