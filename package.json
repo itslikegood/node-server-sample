@@ -18,6 +18,7 @@
   "homepage": "https://github.com/itslikegood/node-server-sample#readme",
   "dependencies": {
     "body-parser": "^1.14.2",
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "gcloud": "^0.29.0"
   }
 }
