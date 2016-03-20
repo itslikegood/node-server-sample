@@ -2,9 +2,11 @@
   "name": "node-server-sample",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server/app.js",
   "scripts": {
-    "test": "test"
+    "start": "node ./server/app.js",
+    "monitor": "nodemon app.js",
+    "deploy": "gcloud preview app deploy app.yaml"
   },
   "repository": {
     "type": "git",
@@ -16,6 +18,9 @@
     "url": "https://github.com/itslikegood/node-server-sample/issues"
   },
   "homepage": "https://github.com/itslikegood/node-server-sample#readme",
+  "engines": {
+    "node": ">=0.12.7"
+  },
   "dependencies": {
     "body-parser": "^1.14.2",
     "express": "^4.13.4",
