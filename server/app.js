@@ -1,19 +1,46 @@
-var express    = require('express');
 var bodyParser = require('body-parser');
-var gcloud     = require('gcloud')({ projectId: 'dailynervedev' });
+var config     = require('./config');
+var express    = require('express');
+var pkgJson    = require('../package.json');
 
 var app = express();
-var gcs = gcloud.storage();
+var env = app.get('env');
+var server;
+
+var models = {
+  contest: require('./contest/contest.model')(config)
+};
+
+if (env === 'development') {
+  app.set('json spaces', 2);
+}
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.get('/info', function(req, res) {
+app.get('/api/info', function(req, res) {
   res.json({
-    message: 'If you see this message, you know where I live.  Stop it, it\'s creepy.'
+    version: pkgJson.version,
+    dataBackend: config.dataBackend
   });
 });
 
-app.listen(3000, function() {
-  console.log('app listening on 3000.');
+app.use('/api/contest', require('./contest/contest.routes')(models.contest));
+
+app.use(function(req, res, next) {
+  next();
 });
+
+app.use(function(req, res) {
+  res.status(404).json({
+    message: 'Resource ' + req.path + ' not found.'
+  });
+})
+
+server = app.listen(process.env.PORT || 8080, function() {
+  var host = server.address().address;
+  var port = server.address().port;
+  console.log('app listening at http://%s:%s', host, port);
+});
+
+module.exports = app;
